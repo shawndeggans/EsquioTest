@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace EsqFeatureToggle
+namespace EsqFeatureToggle.API
 {
     public class Program
     {
