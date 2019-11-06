@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  esqfeaturetoggle.mvc:
+    image: ${DOCKER_REGISTRY-}esqfeaturetogglemvc
+    environment:
+      - WeatherApi=http://EsqFeatureToggle.API/weatherforecast
+    build:
+      context: .
+      dockerfile: EsqFeatureToggle.MVC/Dockerfile
+  esqfeaturetoggle.api:
+    image: ${DOCKER_REGISTRY-}esqfeaturetoggleapi
+    ports:
+      - 57166:80
+      - 44327:443
+    build:
+      context: .
+      dockerfile: EsqFeatureToggle.API/Dockerfile
