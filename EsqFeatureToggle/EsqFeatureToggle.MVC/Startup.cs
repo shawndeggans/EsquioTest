@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using EsqFeatureToggle.MVC.RestClient;
+using Microsoft.FeatureManagement;
 
 namespace EsqFeatureToggle.MVC
 {
@@ -27,6 +28,11 @@ namespace EsqFeatureToggle.MVC
         {
             services.AddHttpClient<IApiClientcs, ApiClientcs>();
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddFeatureManagement()
+                .AddFeatureFilter<Features.FreemiumFilter>()
+                .AddFeatureFilter<Features.PrimiumFilters>()
+                .UseDisabledFeaturesHandler(new Features.DisabledFeaturesRedirectHandler("FeatureNotAvailable"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
